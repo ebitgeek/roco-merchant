@@ -1,7 +1,21 @@
-// app/api/notify/route.ts
+export async function GET(request) {
 
+    const {searchParams} = new URL(request.url);
 
-export async function GET() {
+    const bark = searchParams.get("bark");
+
+    if (!bark) {
+        return Response.json(
+            {
+                success: false,
+                error: "missing bark parameter"
+            },
+            {
+                status: 400
+            }
+        );
+    }
+
     const response = await fetch(
         "https://www.taptap.cn/ug-apis/roco/v1/merchant/current",
         {
@@ -14,9 +28,7 @@ export async function GET() {
 
     const data = await response.json()
 
-    const barks = [
-        'https://api.day.app/jgNgRjp5e2oKqrtWa8Ev3g'
-    ]
+    const barkUrl = `https://api.day.app/${bark}`
 
     const triggerKeys = ['棱镜', '祝福', '炫彩', '国王']
 
@@ -30,17 +42,13 @@ export async function GET() {
         const title = `远行商人 - ${data.round.date} ${data.round.slot}`;
         const body = goods.join(" ");
 
-        await Promise.all(
-            barks.map((bark) =>
-                fetch(
-                    `${bark}/${encodeURIComponent(
-                        title
-                    )}/${encodeURIComponent(
-                        body
-                    )}`
-                )
-            )
-        );
+        await fetch(
+            `${barkUrl}/${encodeURIComponent(
+                title
+            )}/${encodeURIComponent(
+                body
+            )}`
+        )
     }
     return Response.json(data, {
         status: response.status

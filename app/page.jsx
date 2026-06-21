@@ -20,6 +20,7 @@ export default function Home() {
             .catch(console.error);
     }, []);
 
+
     if (!data) {
         return <Loading active={true} style={{position: 'absolute', inset: 0, height: '100%'}}/>;
     }
