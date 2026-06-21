@@ -2,7 +2,6 @@
 
 import {Card, Loading, Title, Typewriter, Collapse} from 'animal-island-ui'
 import {useEffect, useState} from "react";
-import Image from "next/image";
 
 export default function Home() {
 
@@ -56,7 +55,7 @@ export default function Home() {
                                 <Card type="dashed"
                                       className="flex h-16 w-16 items-center justify-center p-2!">
                                     <div className="relative shrink-0">
-                                        <Image
+                                        <img
                                             src={item.icon_url}
                                             alt={item.name}
                                             width={40}
