@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/notify/normal",
+      "schedule": "10 0,4,8,12 * * *"
+    },
+    {
+      "path": "/api/notify/important",
+      "schedule": "30 3,8,11,15 * * *"
+    }
+  ]
+}
